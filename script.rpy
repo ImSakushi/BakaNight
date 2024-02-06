@@ -1,23 +1,32 @@
-﻿
-init:
-    define M = Character("MARCHAND", what_prefix='"', what_suffix='"', color="#c8a2c8")
-    define MC = Character("VOUS" , what_prefix='"', what_suffix='"', color="#a2c8a2")
-    define O = Character("OUVRIER", what_prefix='"', what_suffix='"', color="#c2c8a2")
-    define P = Character("PEINTRE", what_prefix='"', what_suffix='"', color="#a2a2c8")
-
-image empty:
-    "images/empty_1.png"
-    pause 0.4
-    "images/empty_2.png"
-    pause 0.4
-    "images/empty_3.png"
-    pause 0.4
-    "images/empty_4.png"
-    pause 0.4
-    repeat
+﻿init python:
+    personnages = ["Einstein", "Cléopâtre",] ## "Johnny Hallyday", "Napoléon Bonapart", "Charles de Gaulle", "Jules César", "Merlin l'enchanteur", "Sherlock Holmes", "Arsène Lupin", "Raiponce", "Chat Botté", "Pierre Lacour"]
+    personnage_choisi = ""
 
 label start:
-    scene empty
+    call choix_personnage
+
+label choix_personnage:
+    $ personnage_choisi = renpy.random.choice(personnages)
+    "Vous avez choisi [personnage_choisi]. Est-ce correct ?"
+    menu:
+        "Oui":
+            jump dialogues_personnage
+        "Non, choisir à nouveau":
+            jump choix_personnage
+
+label dialogues_personnage:
+    if personnage_choisi == "Marchand":
+        M "Ah, un marchand! Prêt à faire quelques échanges?"
+    elif personnage_choisi == "Ouvrier":
+        O "Un ouvrier, hein? Il y a toujours du travail pour les mains habiles."
+    elif personnage_choisi == "Peintre":
+        P "Un peintre? Votre vision du monde doit être fascinante."
+    elif personnage_choisi == "Aventurier":
+        MC "À l'aventure, alors! Qui sait ce que nous découvrirons?"
+    # Ajoutez des conditions similaires pour les autres personnages
+    else:
+        "Un personnage intéressant! Je suis sûr que vous aurez un impact significatif."
+
     "Où suis-je ?"
     "Qui suis-je ?"
     "J’étais pourtant aux pyramides d’Égyptes..."
