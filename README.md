@@ -23,9 +23,9 @@ Durant cette aventure de 4 à 5 minutes, les joueurs auront l'opportunité de ch
 3. Ouvrez Renpy et ajoutez le dossier du jeu à la liste des projets.
 4. Sélectionnez "Voyage à Bordeaux" et cliquez sur "Lancer le Projet".
 
-## Participation à la Baccanight
+## Participation à la Bacchanight
 
-Ce jeu a été spécialement conçu pour la Baccanight au musée des Beaux-Arts de Bordeaux, offrant aux visiteurs une expérience interactive unique. En mêlant histoire locale, art et jeu vidéo, "Voyage à Bordeaux" vise à enrichir la visite du musée d'une manière ludique et éducative.
+Ce jeu a été spécialement conçu pour la Baccanight au musée des Beaux-Arts de Bordeaux, offrant aux visiteurs une expérience interactive unique. En mêlant histoire locale, art et jeu vidéo, ce hey vise à enrichir la visite du musée d'une manière ludique et éducative.
 
 ## Remerciements
 
