@@ -1,6 +1,7 @@
 ﻿init:
     define M = Character("MARCHAND", what_prefix='"', what_suffix='"', color="#c8a2c8")
     define MC = Character("VOUS" , what_prefix='"', what_suffix='"', color="#a2c8a2")
+    define OJSP = Character("???", what_prefix='"', what_suffix='"', color="#c2c8a2")
     define O = Character("OUVRIER", what_prefix='"', what_suffix='"', color="#c2c8a2")
     define P = Character("PEINTRE", what_prefix='"', what_suffix='"', color="#a2a2c8")
 
@@ -18,19 +19,17 @@ image empty:
 init python:
     personnages = ["Einstein", "Cléopâtre",] ## "Johnny Hallyday", "Napoléon Bonapart", "Charles de Gaulle", "Jules César", "Merlin l'enchanteur", "Sherlock Holmes", "Arsène Lupin", "Raiponce", "Chat Botté", "Pierre Lacour"]
     personnage_choisi = ""
+    confirmed_choice = False
 
 screen choix_personnage_confirmation(personnage):
     zorder 100
-    # Ajout d'un style de fond noir pour le cadre
     frame:
         background "black"
-        align (.5, .5) # Centre l'élément dans l'écran
+        align (.5, .5)
         vbox:
-            # Assurez-vous que le texte est blanc pour contraster avec le fond noir
             text "Vous avez choisi [personnage]. Est-ce correct ?"
-            spacing 10 # Ajoute un espace entre les éléments de la vbox
-            # Séparation des boutons pour qu'ils apparaissent sur des lignes distinctes
-            textbutton "Oui" action [Hide("choix_personnage_confirmation"), Jump("dialogues_personnage")]
+            spacing 10
+            textbutton "Oui" action [SetVariable("confirmed_choice", True), Hide("choix_personnage_confirmation"), Jump("dialogues_personnage")]
             textbutton "Choisir à nouveau" action [Hide("choix_personnage_confirmation"), Jump("choix_personnage")]
 
 
@@ -42,16 +41,36 @@ label start:
     call choix_personnage
 
 label choix_personnage:
-    $ personnage_choisi = renpy.random.choice(personnages)
-    show screen choix_personnage_confirmation(personnage_choisi)
+    window hide
+    $ confirmed_choice = False
+    while not confirmed_choice:
+        $ personnage_choisi = renpy.random.choice(personnages)
+        show screen choix_personnage_confirmation(personnage_choisi)
+        $ renpy.pause()  # Cette pause attend une interaction utilisateur
+
 
 label dialogues_personnage:
-    $ renpy.block_rollback()
-    "J’étais pourtant aux pyramides d’Égyptes..."
+    if personnage_choisi == "Einstein":
+        "J’étais pourtant à l’institut de Princeton."
+    elif personnage_choisi == "Cléopâtre":
+        "J’étais pourtant aux pyramides d’Égyptes..."
+    else:
+        "Je suis un personnage inconnu."
     "Comment est-ce poss-{nw}"
     scene bg_1 with fade
-    M "Vous allez bien [personnage_choisi] ?"
-    M "Vous semblez toute pâle."
+    $ renpy.block_rollback()
+    if personnage_choisi == "Einstein":
+        M "Vous allez bien monsieur ?"
+    elif personnage_choisi == "Cléopâtre":
+        M "Vous allez bien, madame ?"
+    else:
+        M "Vous allez bien ?"
+    if personnage_choisi == "Einstein":
+        M "Vous semblez tout pâle."
+    elif personnage_choisi == "Cléopâtre":
+        M "Vous semblez toute pâle."
+    else:
+        M "Vous semblez toute pâle."
 
     menu:
         "Qui êtes-vous ?":
@@ -65,7 +84,12 @@ label qui_etes_vous:
     M "Je ne suis qu’un humble marchand."
     M "Je reviens tout juste d’un périple en Chine."
     M "J’y ai goûté le plus savoureux des thés !"
-    "Mais{w=0.3} qu’est-ce que je fais ici ?"
+    if personnage_choisi == "Einstein":
+        "Par quel phénomène puis-je avoir atterri ici ?"
+    elif personnage_choisi == "Cléopâtre":
+        "Comment ai-je atterri ici ?"
+    else:
+        "Mais{w=0.3} qu’est-ce que je fais ici ?"
     MC "Et où allons-nous ?"
     M "Tout droit vers les quais de Bordeaux !"
     MC "Bordeaux ?"
@@ -79,7 +103,12 @@ label ou_sommes_nous:
     M "À bord du navire le plus éminent marchand d’Europe !"
     M "Je reviens tout juste d’un voyage en Chine."
     M "J’y ai goûté le plus savoureux des thés !"
-    MC "Mais qu’est-ce que je fais ici ?"
+    if personnage_choisi == "Einstein":
+        "Par quel phénomène puis-je avoir atterri ici ?"
+    elif personnage_choisi == "Cléopâtre":
+        "Comment ai-je atterri ici ?"
+    else:
+        "Mais{w=0.3} qu’est-ce que je fais ici ?"
     MC "Et où allons-nous ?"
     M "Tout droit vers les quais de Bordeaux !"
     MC "Bordeaux ?"
@@ -89,20 +118,36 @@ label ou_sommes_nous:
     jump dialogue_apres_choix
 
 label dialogue_apres_choix:
-    MC "Connaissez-vous un moyen d’aller aux pyramides d’égypte ?"
+    if personnage_choisi == "Einstein":
+        MC "Connaissez-vous un moyen d’aller à Princeton ?"
+        MC "Je me dois de finir mes recherches."
+    elif personnage_choisi == "Cléopâtre":
+        MC "Connaissez-vous un moyen d’aller en Égypte ?"
+    else:
+        MC "Connaissez-vous un moyen d’aller aux pyramides d’égypte ?"
     M "Je ne connais pas assez les lieux pour vous aider."
     M "Cependant,{w=0.3} je pense que l’homme au haut-de-forme appuyé sur la balustrade pourra vous aider."
     M "C’est un peintre connu qui connaît la ville comme sa poche."
     M "Il a même fondé un tout nouveau musée,{w=0.4} le musée des Beaux-Arts !"
-    "Ces informations ne m’aident franchement pas."
+    if personnage_choisi == "Einstein":
+        "Ces informations ne me sont d’aucune utilité."
+    elif personnage_choisi == "Cléopâtre":
+        "Ces informations ne me sont d’aucune utilité."
+    else:
+        "Ces informations ne m’aident franchement pas."
     "Mais il semble savoir de quoi il parle, ça ne coûte rien d’essayer."
     jump ouvrier
 
 label ouvrier:
     scene bg_ouvrier with fade
     MC "Je le vois,{w=0.3} ça doit être lui le fameux peint-{nw}"
-    O "HO LÀ,{w=0.3} MADAME !"
-    O "C’est quoi cet accoutrement ?"
+    OJSP "HO LÀ,{w=0.3} MADAME !"
+    if personnage_choisi == "Einstein":
+        OJSP "Quel est le secret qui a permis de faire pousser une telle moustache ?"
+    elif personnage_choisi == "Cléopâtre":
+        OJSP "C'est quoi ces vêtements, vous vous prenez pour Cléopâtre ou quoi ?"
+    else:
+        OJSP "C’est quoi cet accoutrement ?"
     MC "Mais,{w=0.3} c’est qui lui ?"
 
     menu:
@@ -114,8 +159,8 @@ label ouvrier:
 
 label repondre:
     MC "Ce sont des vêtements nobles sale malôtru !"
-    O "Faites attention à vous, y’en a qui travaillent ici."
-    O "Ici vous ne trouverez que de simples ouvriers acharnés."
+    OJSP "Faites attention à vous, il y en a qui travaillent ici."
+    OJSP "Ici vous ne trouverez que de simples ouvriers acharnés."
     O "Si c’est la haute société que vous cherchez,{w=0.3} ça se passe là-haut."
     MC "Je vous remercie."
     O "Bon,{w=0.3} c’est pas tout,{w=0.3} mais faut que je retourne travailler moi."
@@ -124,7 +169,7 @@ label repondre:
 
 label ne_rien_dire:
     MC "…"
-    O "Ici vous ne trouverez que de simples ouvriers acharnés."
+    OJSP "Ici vous ne trouverez que de simples ouvriers acharnés."
     O "Si c’est la haute société que vous cherchez,{w=0.3} ça se passe là-haut."
     MC "…"
     O "Bon,{w=0.3} c’est pas tout,{w=0.3} mais faut que je retourne travailler moi."
@@ -139,7 +184,12 @@ label peintre:
     MC "J’ai été transporté ici contre mon gré et je souhaiterai rentrer d’où je viens."
     MC "J’ai ouïe dire que vous sauriez peut-être m’aider."
     P "C’est peut-être le cas mais,{w=0.3} qu’est-ce que j’y gagnerai ?"
-    MC "Eh bien,{w=0.3} je pourrais vous donner le Sceptre Papyrus."
+    if personnage_choisi == "Einstein":
+        MC "Eh bien,{w=0.3} je pourrais vous donner la formule de la relativité générale."
+    elif personnage_choisi == "Cléopâtre":
+        MC "Eh bien,{w=0.3} je pourrais vous donner mon collier, il vaut des centaines de deben."
+    else:
+        MC "Eh bien,{w=0.3} je pourrais vous donner le Sceptre Papyrus."
     P "Je n’ai pas la moindre idée de ce que c’est."
     P "Mais soit,{w=0.3} j’accepte."
     P "Je connais peut-être des gens selon votre provenance."
@@ -167,6 +217,12 @@ label peintre:
 label peinture_accord:
     P "Parfait !{w=0.3} Pourriez-vous vous placez ici ?"
     P "Où désirez-vous être peint ?"
+    if personnage_choisi == "Einstein":
+        MC "Dans un institut dédié à la science."
+    elif personnage_choisi == "Cléopâtre":
+        MC "Faites-moi donc devant les grandes pyramides d'Égypte."
+    else:
+        MC "Faites-moi donc devant les grandes pyramides d'Égypte."
     MC "Faites-moi donc aux pyramides d'égypte."
     P "Je commence."
     MC "Je me sens étrange…"
@@ -194,6 +250,12 @@ label peinture_hesitation:
     MC "Bon, c’est d’accord."
     P "Super !{w=0.3} Pourriez-vous vous mettre ici ?"
     P "Dans quel endroit vous voudriez je vous peigne ?"
+    if personnage_choisi == "Einstein":
+        MC "Dans un institut dédié à la science."
+    elif personnage_choisi == "Cléopâtre":
+        MC "Faites-moi donc devant les grandes pyramides d'Égypte."
+    else:
+        MC "Faites-moi donc devant les grandes pyramides d'Égypte."
     MC "Faites-moi donc aux pyramides d'égypte."
     P "Je commence."
     $ renpy.pause()
@@ -214,4 +276,3 @@ label peinture_hesitation:
     MC "La chaleur, le sable, pas de doute, je suis de retour aux pyramides."
 
     return
-
