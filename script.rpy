@@ -5,6 +5,10 @@
     define O = Character("OUVRIER", what_prefix='"', what_suffix='"', color="#c2c8a2")
     define P = Character("PEINTRE", what_prefix='"', what_suffix='"', color="#a2a2c8")
 
+image marchand mr1 = "images/marchand/mr1.png"
+image marchand mrmouth = "images/marchand/mrmouth.png"
+
+
 image empty:
     "images/empty_1.png"
     pause 0.4
@@ -59,12 +63,14 @@ label dialogues_personnage:
     "Comment est-ce poss-{nw}"
     scene bg_1 with fade
     $ renpy.block_rollback()
+    show marchand mrmouth zorder 2 at t11
     if personnage_choisi == "Einstein":
         M "Vous allez bien monsieur ?"
     elif personnage_choisi == "Cléopâtre":
         M "Vous allez bien, madame ?"
     else:
         M "Vous allez bien ?"
+    show marchand mr1
     if personnage_choisi == "Einstein":
         M "Vous semblez tout pâle."
     elif personnage_choisi == "Cléopâtre":
@@ -81,6 +87,7 @@ label dialogues_personnage:
 
 label qui_etes_vous:
     MC "Qui êtes-vous ?"
+    show marchand mrmouth
     M "Je ne suis qu’un humble marchand."
     M "Je reviens tout juste d’un périple en Chine."
     M "J’y ai goûté le plus savoureux des thés !"
@@ -100,6 +107,7 @@ label qui_etes_vous:
 
 label ou_sommes_nous:
     MC "Où sommes-nous ?"
+    show marchand mrmouth
     M "À bord du navire le plus éminent marchand d’Europe !"
     M "Je reviens tout juste d’un voyage en Chine."
     M "J’y ai goûté le plus savoureux des thés !"
