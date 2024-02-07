@@ -7,6 +7,8 @@
 
 image marchand mr1 = "images/marchand/mr1.png"
 image marchand mrmouth = "images/marchand/mrmouth.png"
+image marchand mrpointing = "images/marchand/mrpointing.png"
+image ouvrier ovr1 = "images/ouvrier/ovr1.png"
 
 
 image empty:
@@ -63,7 +65,7 @@ label dialogues_personnage:
     "Comment est-ce poss-{nw}"
     scene bg_1 with fade
     $ renpy.block_rollback()
-    show marchand mrmouth zorder 2 at t11
+    show marchand mrmouth zorder 2 at tcommon(500)
     if personnage_choisi == "Einstein":
         M "Vous allez bien monsieur ?"
     elif personnage_choisi == "Cléopâtre":
@@ -98,9 +100,11 @@ label qui_etes_vous:
     else:
         "Mais{w=0.3} qu’est-ce que je fais ici ?"
     MC "Et où allons-nous ?"
+    show marchand mrpointing at tcommon(450)
     M "Tout droit vers les quais de Bordeaux !"
     MC "Bordeaux ?"
     M "Bordeaux,{w=0.3} le port de la lune !"
+    show marchand mr1 at tcommon(500)
     M "Ce nom vient de la forme en croissant du fleuve,{w=0.3} ça ne vous dit rien ?"
     "Ça ne me dit vraiment rien..."
     jump dialogue_apres_choix
@@ -118,9 +122,11 @@ label ou_sommes_nous:
     else:
         "Mais{w=0.3} qu’est-ce que je fais ici ?"
     MC "Et où allons-nous ?"
+    show marchand mrpointing at tcommon(450)
     M "Tout droit vers les quais de Bordeaux !"
     MC "Bordeaux ?"
     M "Bordeaux,{w=0.3} le port de la lune !"
+    show marchand mr1 at tcommon(500)
     M "Ce nom vient de la forme en croissant du fleuve,{w=0.3} ça ne vous dit rien ?"
     "Ça ne me dit vraiment rien..."
     jump dialogue_apres_choix
@@ -133,7 +139,8 @@ label dialogue_apres_choix:
         MC "Connaissez-vous un moyen d’aller en Égypte ?"
     else:
         MC "Connaissez-vous un moyen d’aller aux pyramides d’égypte ?"
-    M "Je ne connais pas assez les lieux pour vous aider."
+    M "Je ne connais pas assez les lieux pour vous aider..."
+    show marchand mrmouth
     M "Cependant,{w=0.3} je pense que l’homme au haut-de-forme appuyé sur la balustrade pourra vous aider."
     M "C’est un peintre connu qui connaît la ville comme sa poche."
     M "Il a même fondé un tout nouveau musée,{w=0.4} le musée des Beaux-Arts !"
@@ -149,6 +156,7 @@ label dialogue_apres_choix:
 label ouvrier:
     scene bg_ouvrier with fade
     MC "Je le vois,{w=0.3} ça doit être lui le fameux peint-{nw}"
+    show ouvrier ovr1 zorder 2 at tcommon(500)
     OJSP "HO LÀ,{w=0.3} MADAME !"
     if personnage_choisi == "Einstein":
         OJSP "Quel est le secret qui a permis de faire pousser une telle moustache ?"
@@ -156,7 +164,7 @@ label ouvrier:
         OJSP "C'est quoi ces vêtements, vous vous prenez pour Cléopâtre ou quoi ?"
     else:
         OJSP "C’est quoi cet accoutrement ?"
-    MC "Mais,{w=0.3} c’est qui lui ?"
+    "Mais,{w=0.3} c’est qui lui ?"
 
     menu:
         "Répondre":
