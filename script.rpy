@@ -87,6 +87,9 @@ screen choix_sexe:
 #     "Cliquez pour commencer"
 #     $ renpy.pause()  # Cette pause attend une interaction utilisateur
 #     jump start
+label main_menu:
+    jump start
+
 
 label start:
     scene empty
@@ -257,7 +260,7 @@ label peintre:
     P "Malheureusement nous sommes dimanche aujourd’hui et il est fermé."
     P "Je pourrais vous y accompagner demain dès la première heure."
     show pierre plc1
-    MC "Je n’ai aucun endroit où loger cette nuit,{w=0.3} je ne peux pas attendre."
+    MC "Je ne peux pas attendre et je n’ai aucun endroit où loger cette nuit."
     hide pierre plc1 with dissolve
     show hotel zorder 1 with dissolve
     P "Vous voyez l’hôtel derrière moi ?"
@@ -288,7 +291,7 @@ label peintre:
 label peinture_accord:
     show pierre plcm
     P "Parfait !{w=0.3} Pourriez-vous vous placer ici ?"
-    P "Je vais vous peindre par-dessus cette esquisse du musée que j’ai commencer hier soir."
+    P "Je vais vous peindre par-dessus cette esquisse du musée que j’ai commencée hier soir."
     P "Je commence."
     hide pierre plcm with dissolve
     $ renpy.pause(1.5)
