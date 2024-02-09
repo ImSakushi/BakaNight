@@ -17,7 +17,8 @@ image pierre plc1 = Transform("images/pierre/plc1.png", zoom=1.3)
 image pierre plcm = Transform("images/pierre/plcm.png", zoom=1.3)
 image pierre plcsp = Transform("images/pierre/plcsp.png", zoom=1.3)
 image pierre plcf = Transform("images/pierre/plcf.png", zoom=1.3)
-image black = Transform("images/black.png", zoom=20, alpha=0.6)
+image black = Transform("images/black.png", zoom=20, alpha=0.45)
+image black2 = Transform("images/black.png", zoom=20, alpha=0.70)
 
 # Pour les images avec transparence 60%
 image marchand mr1t = Transform("images/marchand/mr1.png", zoom=1.3, alpha=0.6)
@@ -27,6 +28,30 @@ image ouvrier ovrmoutht = Transform("images/ouvrier/ovrmouth.png", zoom=1.3, alp
 
 image hotel = "images/hotel.jpg"
 
+transform credits_scroll:
+    yalign 1.0
+    linear 20.0 yalign -1.0
+
+screen credits_screen():
+    tag menu  # Utilisez un tag approprié si nécessaire
+    text """Histoire interactive par :
+
+    Pablo CASOLA
+
+    Bryan GONCALVES
+
+    Matthias CASA NOVA
+
+    Hugo GITTON
+
+    Titouan GONZALEZ
+
+    Driss CHIARI-NOBLET
+
+
+
+    Merci à tous les intervenants
+    de MMI Bordeaux pour leur aide.""" align (.5, .0) size 60 at credits_scroll
 
 
 
@@ -121,8 +146,9 @@ label qui_etes_vous:
     M "Bordeaux,{w=0.3} le port de la lune !"
     show marchand mr1 at tcommon(500)
     M "Ce nom vient de la forme en croissant du fleuve,{w=0.3} ça ne vous dit rien ?"
-    show marchand mr1t
+    show black zorder 3
     pensees "J’étais déjà à Bordeaux, qu’est-ce qu’il se passe ?"
+    hide black
     jump dialogue_apres_choix
 
 label ou_sommes_nous:
@@ -138,8 +164,9 @@ label ou_sommes_nous:
     M "Bordeaux,{w=0.3} le port de la lune !"
     show marchand mr1 at tcommon(500)
     M "Ce nom vient de la forme en croissant du fleuve,{w=0.3} ça ne vous dit rien ?"
-    show marchand mr1t
+    show black zorder 3
     pensees "J’étais déjà à Bordeaux,{w=0.3} qu’est-ce qu’il se passe ?"
+    hide black
     jump dialogue_apres_choix
 
 label dialogue_apres_choix:
@@ -170,8 +197,9 @@ label ouvrier:
         OJSP "HO LÀ,{w=0.3} VOUS !"
     OJSP "C’est quoi ce bloc de métal que vous tenez la main ?"
     OJSP "D’où est-ce que vous venez ?"
-    show ouvrier ovrmoutht
+    show black zorder 3
     pensees "Mais,{w=0.3} c’est qui lui ?"
+    hide black
     show ouvrier ovrmouth
 
     menu:
@@ -260,19 +288,29 @@ label peintre:
 label peinture_accord:
     show pierre plcm
     P "Parfait !{w=0.3} Pourriez-vous vous placer ici ?"
-    P "Je vais vous peindre par-dessus cette esquisse du musée que j’ai commencée hier soir."
+    P "Je vais vous peindre par-dessus cette esquisse du musée que j’ai commencer hier soir."
     P "Je commence."
-    MC "Je me sens étrange…"
-    # Transition ou effet pour montrer le passage du temps
-    P "Vous avez un air vraiment très particulier."
+    hide pierre plcm with dissolve
+    $ renpy.pause(1.5)
+    # Transition ou effet + Attendre un peu
+    MC "Je me sens bizarre…"
+    scene defor_1
+    $ renpy.pause(1.5)
+    # Transition ou effet + Attendre un peu
+    P "Vous dégagez un air vraiment très particulier."
+    $ renpy.pause(1)
     MC "Comme si je partais…"
-    # Encore une transition ou effet
+    show black zorder 3
+    $ renpy.pause(1.5)
+    # Transition ou effet + Attendre un peu
     P "J’approche de la fin."
+    show black2 zorder 3
+    $ renpy.pause(1.5)
+    # Attendre un peu
     P "Voilà qui est fait !"
     P "Bon voyage !"
     # Fondu en noir crédit de fin
-
-    jump start
+    jump credit
 
 label peinture_hesitation:
     show pierre plcm
@@ -287,23 +325,14 @@ label peinture_hesitation:
     MC "Ce n’est peut-être pas une mauvaise idée au final."
     hide peinture with Dissolve(1.0)
     MC "Bon, c’est d’accord."
-    P "Parfait !{w=0.3} Pourriez-vous vous placer ici ?"
-    P "Je vais vous peindre par-dessus cette esquisse du musée que j’ai commencer hier soir."
-    P "Je commence."
-    scene defor_1
-    $ renpy.pause(1.5)
-    # Transition ou effet + Attendre un peu
-    MC "Je me sens bizarre…"
-    $ renpy.pause(1.5)
-    # Transition ou effet + Attendre un peu
-    P "Vous dégagez un air vraiment très particulier."
-    MC "Comme si je partais…"
-    $ renpy.pause(1.5)
-    # Transition ou effet + Attendre un peu
-    P "J’approche de la fin."
-    $ renpy.pause(1.5)
-    # Attendre un peu
-    P "Voilà qui est fait !"
-    P "Bon voyage !"
-    # Fondu en noir crédit de fin
-    jump start
+    jump peinture_accord
+
+label credit:
+    scene empty
+    show screen credits_screen with fade
+    $ renpy.pause(20.0)  # Adaptez la durée selon la longueur de votre défilement et la vitesse souhaitée
+    # Vous pouvez ajouter une musique de fond pour les crédits ici
+    # $ renpy.music.play("musique_credit.mp3")
+    hide screen credits_screen with fade
+    # $ renpy.music.stop()  # Arrêter la musique de fond après les crédits si nécessaire
+    jump start # Ou toute autre logique pour la suite
