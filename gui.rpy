@@ -75,7 +75,7 @@ define gui.interface_text_font = "fonts/InriaSerif-Regular.ttf"
 define gui.text_size = 40
 
 ## La taille pour le nom des personnages.
-define gui.name_text_size = 43
+define gui.name_text_size = 50
 
 ## La taille du texte dans l’interface de jeu.
 define gui.interface_text_size = 30
@@ -451,7 +451,7 @@ init python:
     def small():
 
         ## Tailles des polices.
-        gui.text_size = 26
+        gui.text_size = 40
         gui.name_text_size = 31
         gui.notify_text_size = 22
         gui.interface_text_size = 26
@@ -459,7 +459,7 @@ init python:
         gui.label_text_size = 29
 
         ## Ajuste la position de la zone de texte.
-        gui.textbox_height = 203
+        gui.textbox_height = 300
         gui.name_xpos = 68
         gui.dialogue_xpos = 76
         gui.dialogue_width = 929
