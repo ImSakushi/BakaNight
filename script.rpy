@@ -4,22 +4,27 @@
     define MC = Character("VOUS" , what_prefix='"', what_suffix='"', color="#a2c8a2")
     define OJSP = Character("OUVRIER", what_prefix='"', what_suffix='"', color="#a2a2c8")
     define O = Character("OUVRIER", what_prefix='"', what_suffix='"', color="#a2a2c8")
-    define P = Character("PEINTRE", what_prefix='"', what_suffix='"', color="#a2a2c8")
+    define P = Character("PIERRE LACOUR", what_prefix='"', what_suffix='"', color="#a2a2c8")
     define pensees = Character("VOUS", what_prefix="{i}(", what_suffix="){/i}", color="#a2c8a2")
 
-image marchand mr1t = im.Alpha("images/marchand/mr1.png", 0.6)
-image marchand mr1 = "images/marchand/mr1.png"
-image marchand mrmouth = "images/marchand/mrmouth.png"
-image marchand mrmoutht = im.Alpha("images/marchand/mrmouth.png", 0.6)
-image marchand mrpointing = "images/marchand/mrpointing.png"
-image ouvrier ovr1 = "images/ouvrier/ovr1.png"
-image ouvrier ovr1t = im.Alpha("images/ouvrier/ovr1.png", 0.6)
-image ouvrier ovrmouth = "images/ouvrier/ovrmouth.png"
-image ouvrier ovrmoutht = im.Alpha("images/ouvrier/ovrmouth.png", 0.6)
-image pierre plc1 = "images/pierre/plc1.png"
-image pierre plcm = "images/pierre/plcm.png"
-image pierre plcsp = "images/pierre/plcsp.png"
-image pierre plcf = "images/pierre/plcf.png"
+image marchand mr1 = Transform("images/marchand/mr1.png", zoom=1.3)
+image marchand mrmouth = Transform("images/marchand/mrmouth.png", zoom=1.3)
+image marchand mrpointing = Transform("images/marchand/mrpointing.png", zoom=1.3)
+image ouvrier ovr1 = Transform("images/ouvrier/ovr1.png", zoom=1.3)
+image ouvrier ovrp = Transform("images/ouvrier/ovrp.png", zoom=1.3)
+image ouvrier ovrmouth = Transform("images/ouvrier/ovrmouth.png", zoom=1.3)
+image pierre plc1 = Transform("images/pierre/plc1.png", zoom=1.3)
+image pierre plcm = Transform("images/pierre/plcm.png", zoom=1.3)
+image pierre plcsp = Transform("images/pierre/plcsp.png", zoom=1.3)
+image pierre plcf = Transform("images/pierre/plcf.png", zoom=1.3)
+image black = Transform("images/black.png", zoom=20, alpha=0.6)
+
+# Pour les images avec transparence 60%
+image marchand mr1t = Transform("images/marchand/mr1.png", zoom=1.3, alpha=0.6)
+image marchand mrmoutht = Transform("images/marchand/mrmouth.png", zoom=1.3, alpha=0.6)
+image ouvrier ovr1t = Transform("images/ouvrier/ovr1.png", zoom=1.3, alpha=0.6)
+image ouvrier ovrmoutht = Transform("images/ouvrier/ovrmouth.png", zoom=1.3, alpha=0.6)
+
 image hotel = "images/hotel.jpg"
 
 
@@ -47,7 +52,7 @@ screen choix_sexe:
         background "black"
         align (.5, .5)  # Centre l'élément dans l'écran
         vbox:
-            text "Choisissez votre sexe :" align (.5, .5) size 50
+            text "Choisissez votre genre :" align (.5, .5) size 50
             spacing 20  # Augmente l'espace entre les éléments pour une meilleure lisibilité
             textbutton "Homme" action [SetVariable("sexe_choisi", "Homme"), Hide("choix_sexe"), Jump("dialogues_personnage")] align (.5, .5) text_size 50
             textbutton "Femme" action [SetVariable("sexe_choisi", "Femme"), Hide("choix_sexe"), Jump("dialogues_personnage")] align (.5, .5) text_size 50
@@ -133,6 +138,7 @@ label ou_sommes_nous:
     M "Bordeaux,{w=0.3} le port de la lune !"
     show marchand mr1 at tcommon(500)
     M "Ce nom vient de la forme en croissant du fleuve,{w=0.3} ça ne vous dit rien ?"
+    show marchand mr1t
     pensees "J’étais déjà à Bordeaux,{w=0.3} qu’est-ce qu’il se passe ?"
     jump dialogue_apres_choix
 
@@ -145,7 +151,7 @@ label dialogue_apres_choix:
     M "Cependant,{w=0.3} l’homme au haut-de-forme appuyé sur la balustrade saura vous guider."
     M "Il s’appelle Pierre Lacour."
     M "C’est un peintre connu qui connaît la ville comme sa poche."
-    show marchand mrmoutht
+    hide marchand mrmouth with fade
     pensees "Je ne vois pas comment un peintre pourrait m'aider à retourner à mon époque..."
     pensees "Mais je n’ai aucune autre piste, ça ne coûte rien d’essayer."
     menu:
@@ -154,7 +160,7 @@ label dialogue_apres_choix:
 
 label ouvrier:
     scene bg_ouvrier with fade
-    MC "Je le vois,{w=0.3} ça doit être lui le fameux peintr-{nw=0.3}"
+    MC "Je le vois,{w=0.3} ça doit être lui le fameux peintr..."
     show ouvrier ovrmouth zorder 2 at tcommon(500)
     if sexe_choisi == "Homme":
         OJSP "HO LÀ,{w=0.3} MONSIEUR !"
@@ -164,14 +170,16 @@ label ouvrier:
         OJSP "HO LÀ,{w=0.3} VOUS !"
     OJSP "C’est quoi ce bloc de métal que vous tenez la main ?"
     OJSP "D’où est-ce que vous venez ?"
+    show ouvrier ovrmoutht
     pensees "Mais,{w=0.3} c’est qui lui ?"
+    show ouvrier ovrmouth
 
     menu:
         "Répondre":
             jump repondre
 
-        "Ne rien dire":
-            jump ne_rien_dire
+        #"Ne rien dire":
+            #jump ne_rien_dire
 
         "Continuer sa route":
             jump peintre
@@ -182,6 +190,7 @@ label repondre:
     show ouvrier ovrmouth
     OJSP "Aucune idée de ce que c’est."
     OJSP "Bref, faites attention à vous il y en a qui travaillent ici."
+    show ouvrier ovrp
     O "Si c’est la haute société que vous cherchez,{w=0.3} ça se passe là-haut."
     show ouvrier ovr1
     MC "Je vous remercie."
@@ -271,7 +280,7 @@ label peinture_hesitation:
     P "Laissez-moi vous convaincre !"
     P "Voici l'une de mes récentes peintures,{w=0.3} vous m’en direz des nouvelles."
     # Insérer l'image avec un fondu
-    show peinture with Dissolve(1.0)
+    show peinture zorder 3 at truecenter with Dissolve(1.0)
     # Attendre un clic de l'utilisateur
     pause
     MC "Il a un certain talent, c’est indéniable."

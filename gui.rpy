@@ -72,7 +72,7 @@ define gui.name_text_font = "fonts/InriaSerif-Regular.ttf"
 define gui.interface_text_font = "fonts/InriaSerif-Regular.ttf"
 
 ## La taille normale pour les dialogues.
-define gui.text_size = 40
+define gui.text_size = 50
 
 ## La taille pour le nom des personnages.
 define gui.name_text_size = 50
@@ -107,7 +107,7 @@ define gui.textbox_height = 300
 
 ## L’emplacement vertical de la zone de texte à l’écran. 0.0 pour le haut, 0.5
 ## pour le centre et 1.0 pour le bas.
-define gui.textbox_yalign = 1.0
+define gui.textbox_yalign = 0.95
 
 
 ## L’emplacement relatif à la zone de texte du nom du personnage en train de
@@ -137,7 +137,7 @@ define gui.namebox_tile = False
 ## L’emplacement du dialogue relatif à la zone de texte. La valeur peut être un
 ## nombre entier de pixels depuis la gauche ou le haut ou 0.5 pour le centre.
 define gui.dialogue_xpos = 227
-define gui.dialogue_ypos = 43
+define gui.dialogue_ypos = 47
 
 ## La largeur maximale en pixels de la zone de dialogue.
 define gui.dialogue_width = 628
@@ -438,62 +438,59 @@ define gui.language = "unicode"
 
 init python:
 
-    ## Ceci augmente la taille des boutons d’accès rapide pour les rendre plus
-    ## accessibles sur les tablettes et les téléphones.
+#     ## Ceci augmente la taille des boutons d’accès rapide pour les rendre plus
+#     ## accessibles sur les tablettes et les téléphones.
     @gui.variant
     def touch():
 
         gui.quick_button_borders = Borders(34, 12, 34, 0)
 
-    ## Ceci change la taille et l’espacement de différents élements de la GUI
-    ## pour s’assurer qu’ils soient visibles sur les téléphones.
+#     ## Ceci change la taille et l’espacement de différents élements de la GUI
+#     ## pour s’assurer qu’ils soient visibles sur les téléphones.
     @gui.variant
     def small():
+        gui.textbox_yalign = 0.75
+        gui.dialogue_ypos = 340
+        gui.text_size = 55
+        gui.name_text_size = 55
+        gui.name_ypos = 0.8
 
-        ## Tailles des polices.
-        gui.text_size = 40
-        gui.name_text_size = 31
-        gui.notify_text_size = 22
-        gui.interface_text_size = 26
-        gui.button_text_size = 26
-        gui.label_text_size = 29
+#         ## Ajuste la position de la zone de texte.
+#
+#         gui.name_xpos = 68
+#         gui.dialogue_xpos = 76
+#         gui.dialogue_width = 929
 
-        ## Ajuste la position de la zone de texte.
-        gui.textbox_height = 300
-        gui.name_xpos = 68
-        gui.dialogue_xpos = 76
-        gui.dialogue_width = 929
+#         ## Changer la taille et l'espacement de diverses choses.
+#         gui.slider_size = 31
 
-        ## Changer la taille et l'espacement de diverses choses.
-        gui.slider_size = 31
+#         gui.choice_button_width = 1047
+#         gui.choice_button_text_size = 26
 
-        gui.choice_button_width = 1047
-        gui.choice_button_text_size = 26
+#         gui.navigation_spacing = 17
+#         gui.pref_button_spacing = 9
 
-        gui.navigation_spacing = 17
-        gui.pref_button_spacing = 9
+#         gui.history_height = 161
+#         gui.history_text_width = 583
 
-        gui.history_height = 161
-        gui.history_text_width = 583
+#         gui.quick_button_text_size = 17
 
-        gui.quick_button_text_size = 17
+#         ## Remplit le canvas du bouton.
+#         gui.file_slot_cols = 2
+#         gui.file_slot_rows = 2
 
-        ## Remplit le canvas du bouton.
-        gui.file_slot_cols = 2
-        gui.file_slot_rows = 2
+#         ## Mode NVL.
+#         gui.nvl_height = 144
 
-        ## Mode NVL.
-        gui.nvl_height = 144
+#         gui.nvl_name_width = 258
+#         gui.nvl_name_xpos = 275
 
-        gui.nvl_name_width = 258
-        gui.nvl_name_xpos = 275
+#         gui.nvl_text_width = 773
+#         gui.nvl_text_xpos = 292
+#         gui.nvl_text_ypos = 5
 
-        gui.nvl_text_width = 773
-        gui.nvl_text_xpos = 292
-        gui.nvl_text_ypos = 5
+#         gui.nvl_thought_width = 1047
+#         gui.nvl_thought_xpos = 17
 
-        gui.nvl_thought_width = 1047
-        gui.nvl_thought_xpos = 17
-
-        gui.nvl_button_width = 1047
-        gui.nvl_button_xpos = 17
+#         gui.nvl_button_width = 1047
+#         gui.nvl_button_xpos = 17
