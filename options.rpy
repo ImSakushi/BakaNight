@@ -158,7 +158,7 @@ define config.save_directory = "Bakanight-1707209553"
 ##
 ## L'icone affichée dans la barre des tâches ou sur le dock.
 
-define config.window_icon = "gui/window_icon.png"
+define config.window_icon = "logo.webp"
 
 
 ## Configuration de la compilation #############################################
