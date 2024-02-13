@@ -7,24 +7,24 @@
     define P = Character("PIERRE LACOUR", what_prefix='"', what_suffix='"', color="#a2a2c8")
     define pensees = Character("VOUS", what_prefix="{i}(", what_suffix="){/i}", color="#a2c8a2")
 
-image marchand mr1 = Transform("images/marchand/mr1.png", zoom=1.3)
-image marchand mrmouth = Transform("images/marchand/mrmouth.png", zoom=1.3)
-image marchand mrpointing = Transform("images/marchand/mrpointing.png", zoom=1.3)
-image ouvrier ovr1 = Transform("images/ouvrier/ovr1.png", zoom=1.3)
-image ouvrier ovrp = Transform("images/ouvrier/ovrp.png", zoom=1.3)
-image ouvrier ovrmouth = Transform("images/ouvrier/ovrmouth.png", zoom=1.3)
-image pierre plc1 = Transform("images/pierre/plc1.png", zoom=1.3)
-image pierre plcm = Transform("images/pierre/plcm.png", zoom=1.3)
-image pierre plcsp = Transform("images/pierre/plcsp.png", zoom=1.3)
-image pierre plcf = Transform("images/pierre/plcf.png", zoom=1.3)
-image black = Transform("images/black.png", zoom=20, alpha=0.45)
-image black2 = Transform("images/black.png", zoom=20, alpha=0.70)
+image marchand mr1 = Transform("images/marchand/mr1.webp", zoom=1.3)
+image marchand mrmouth = Transform("images/marchand/mrmouth.webp", zoom=1.3)
+image marchand mrpointing = Transform("images/marchand/mrpointing.webp", zoom=1.3)
+image ouvrier ovr1 = Transform("images/ouvrier/ovr1.webp", zoom=1.3)
+image ouvrier ovrp = Transform("images/ouvrier/ovrp.webp", zoom=1.3)
+image ouvrier ovrmouth = Transform("images/ouvrier/ovrmouth.webp", zoom=1.3)
+image pierre plc1 = Transform("images/pierre/plc1.webp", zoom=1.3)
+image pierre plcm = Transform("images/pierre/plcm.webp", zoom=1.3)
+image pierre plcsp = Transform("images/pierre/plcsp.webp", zoom=1.3)
+image pierre plcf = Transform("images/pierre/plcf.webp", zoom=1.3)
+image black = Transform("images/black.webp", zoom=20, alpha=0.45)
+image black2 = Transform("images/black.webp", zoom=20, alpha=0.70)
 
 # Pour les images avec transparence 60%
-image marchand mr1t = Transform("images/marchand/mr1.png", zoom=1.3, alpha=0.6)
-image marchand mrmoutht = Transform("images/marchand/mrmouth.png", zoom=1.3, alpha=0.6)
-image ouvrier ovr1t = Transform("images/ouvrier/ovr1.png", zoom=1.3, alpha=0.6)
-image ouvrier ovrmoutht = Transform("images/ouvrier/ovrmouth.png", zoom=1.3, alpha=0.6)
+image marchand mr1t = Transform("images/marchand/mr1.webp", zoom=1.3, alpha=0.6)
+image marchand mrmoutht = Transform("images/marchand/mrmouth.webp", zoom=1.3, alpha=0.6)
+image ouvrier ovr1t = Transform("images/ouvrier/ovr1.webp", zoom=1.3, alpha=0.6)
+image ouvrier ovrmoutht = Transform("images/ouvrier/ovrmouth.webp", zoom=1.3, alpha=0.6)
 
 image hotel = "images/hotel.jpg"
 
@@ -56,13 +56,13 @@ screen credits_screen():
 
 
 image empty:
-    "images/empty_1.png"
+    "images/empty_1.webp"
     pause 0.4
-    "images/empty_2.png"
+    "images/empty_2.webp"
     pause 0.4
-    "images/empty_3.png"
+    "images/empty_3.webp"
     pause 0.4
-    "images/empty_4.png"
+    "images/empty_4.webp"
     pause 0.4
     repeat
 
