@@ -1,5 +1,4 @@
 ## À propos de "Voyage à Bordeaux"
-[Lien du jeu](https://escale-temporelle.netlify.app/)
 "Voyage à Bordeaux" est un visual novel interactif développé en deux semaines pour la Baccanight au musée des Beaux-Arts de Bordeaux. Inspiré par le tableau "Vue d’une partie du port et des quais de Bordeaux dits des Chartrons et de Bacalan" de Pierre Lacour, ce jeu offre une expérience immersive permettant aux joueurs de se plonger dans l'atmosphère du Bordeaux du XVIIIe siècle.
 
 ## Expérience de Jeu
